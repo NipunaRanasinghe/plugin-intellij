@@ -22,12 +22,9 @@ jobs:
           distribution: 'temurin'
 
       - name: Run Build
-        run: ./gradlew build
+        run: ./gradlew clean build
 
-      - name: Create Plugin Zip
-        run: ./gradlew buildPlugin
-
-      - name: Get version and timestamp
+      - name: Extract version
         run: |
           NAME=$((grep -w 'name') < gradle.properties | cut -d= -f2)
           VERSION=$((grep -w 'version') < gradle.properties | cut -d= -f2)
@@ -37,5 +34,6 @@ jobs:
       - name: Archive Plugin Zip
         uses: actions/upload-artifact@v3
         with:
+          compression-level: 0
           name: ${{ env.NAME }}-${{ env.VERSION }}
           path: build/distributions/*.zip
