@@ -33,7 +33,7 @@ jobs:
           echo "VERSION=$VERSION" >> $GITHUB_ENV
 
       - name: Archive Plugin Zip
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           compression-level: 0
           name: ${{ env.NAME }}-${{ env.VERSION }}
